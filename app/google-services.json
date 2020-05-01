@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "458032266887",
+    "firebase_url": "https://the-real-chef.firebaseio.com",
+    "project_id": "the-real-chef",
+    "storage_bucket": "the-real-chef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458032266887:android:376969ec73097ba5e88222",
+        "android_client_info": {
+          "package_name": "com.example.pratisthasthapit.therealchef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458032266887-6h3qmt887erlmm88vm8sesfr84ia9t4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pratisthasthapit.therealchef",
+            "certificate_hash": "ed9397016759ee060d2ff0fa5c96087a6a629815"
+          }
+        },
+        {
+          "client_id": "458032266887-2eetjm91cin8s4oi5e2s6h7qkb3oj3s1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzL66IiCrD5gb2qR8HamZ5km2dvPReEYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458032266887-2eetjm91cin8s4oi5e2s6h7qkb3oj3s1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
