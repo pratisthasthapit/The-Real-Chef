@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    Fragment selectedfragment = null;
+    Fragment selectedFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,33 +37,33 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     switch (menuItem.getItemId()){
                         case R.id.nav_home:{
-                            selectedfragment = new HomeFragment();
+                            selectedFragment = new HomeFragment();
                             break;
                         }
                         case R.id.nav_search:{
-                            selectedfragment = new SearchFragment();
+                            selectedFragment = new SearchFragment();
                             break;
                         }
                         case R.id.nav_add:{
-                            selectedfragment = null;
+                            selectedFragment = null;
                             Intent intent = new Intent(MainActivity.this, PostActivity.class);
                             startActivity(intent);
                             break;
                         }
-                        case R.id.nav_heart:{
-                            selectedfragment = new NotificationFragment();
+                        case R.id.nav_notification:{
+                            selectedFragment = new NotificationFragment();
                             break;
                         }
                         case R.id.nav_profile:{
                             SharedPreferences.Editor editor = getSharedPreferences("PREF", MODE_PRIVATE).edit();
                             editor.putString("profileid", FirebaseAuth.getInstance().getInstance().getCurrentUser().getUid());
                             editor.apply();
-                            selectedfragment = new ProfileFragment();
+                            selectedFragment = new ProfileFragment();
                             break;
                         }
                     }
-                    if (selectedfragment != null){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedfragment).commit();
+                    if (selectedFragment != null){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                     }
                     return true;
                 }
