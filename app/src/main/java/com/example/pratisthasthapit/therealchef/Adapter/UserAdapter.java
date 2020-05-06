@@ -55,7 +55,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         viewHolder.followBtn.setVisibility(View.VISIBLE);
         viewHolder.username.setText(user.getUsername());
         viewHolder.fullname.setText(user.getFullname());
-        Glide.with(mContext).load(user.getImageurl()).into(viewHolder.profileImage);
+        Glide.with(mContext).load(user.getImageurl()).into(viewHolder.userImage);
 
         isFollowing(user.getId(), viewHolder.followBtn);
 
@@ -82,7 +82,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             .child("following").child(user.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(firebaseUser.getUid()).setValue(true);
-
                 }
                 else
                 {
@@ -90,7 +89,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             .child("following").child(user.getId()).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(firebaseUser.getUid()).removeValue();
-
                 }
             }
         });
@@ -98,14 +96,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mUsers.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView username;
         public TextView fullname;
-        public CircleImageView profileImage;
+        public CircleImageView userImage;
         public Button followBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -113,7 +111,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
             username = itemView.findViewById(R.id.username);
             fullname = itemView.findViewById(R.id.fullname);
-            profileImage = itemView.findViewById(R.id.profileImage);
+            userImage = itemView.findViewById(R.id.userImage);
             followBtn = itemView.findViewById(R.id.followBtn);
         }
     }
