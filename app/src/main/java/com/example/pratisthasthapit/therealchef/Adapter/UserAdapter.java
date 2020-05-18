@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.pratisthasthapit.therealchef.Fragment.ProfileFragment;
-import com.example.pratisthasthapit.therealchef.Model.User;
+import com.example.pratisthasthapit.therealchef.User;
 import com.example.pratisthasthapit.therealchef.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

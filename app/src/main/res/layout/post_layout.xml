@@ -31,11 +31,16 @@
 
         </LinearLayout>
 
-        <ImageView
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recipeImage"
-            android:background="@drawable/image_round"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recipeImage" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,22 +50,22 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/like"
+                android:id="@+id/likeImage"
                 android:src="@drawable/ic_like"/>
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/comment"
+                android:id="@+id/commentImage"
                 android:src="@drawable/ic_comment"
-                android:layout_toEndOf="@+id/like"
+                android:layout_toEndOf="@+id/likeImage"
                 android:layout_marginStart="10dp"/>
             
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/save"
+                android:id="@+id/saveImage"
                 android:src="@drawable/ic_save"/>
 
         </RelativeLayout>
@@ -70,34 +75,67 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textStyle="bold"
-            android:id="@+id/likes"
+            android:id="@+id/numLikes"
             android:textColor="@color/colorPrimaryDark"/>
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:id="@+id/chef"-->
-<!--            android:textColor="@color/colorPrimaryDark"/>-->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:id="@+id/recipeName"
+            android:textStyle="bold"
+            android:id="@+id/chef"
             android:textColor="@color/colorPrimaryDark"/>
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:id="@+id/comments"-->
-<!--            android:text="View comments"-->
-<!--            android:textColor="@color/colorAccent"/>-->
+        <TextView
+            android:id="@+id/recipeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ingredientText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Ingredients:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:id="@+id/ingredient"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/methodText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Method:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:id="@+id/method"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:id="@+id/comment"
+            android:text="View comments"
+            android:textColor="@color/colorAccent"/>
 
     </LinearLayout>
 

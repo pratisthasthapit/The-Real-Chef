@@ -1,4 +1,4 @@
-package com.example.pratisthasthapit.therealchef.Model;
+package com.example.pratisthasthapit.therealchef;
 
 public class User {
 

@@ -1,8 +1,5 @@
 package com.example.pratisthasthapit.therealchef.Fragment;
 
-import android.app.DownloadManager;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.pratisthasthapit.therealchef.Adapter.UserAdapter;
-import com.example.pratisthasthapit.therealchef.Model.User;
+import com.example.pratisthasthapit.therealchef.User;
 import com.example.pratisthasthapit.therealchef.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +37,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.postRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -83,7 +80,6 @@ public class SearchFragment extends Fragment {
                     User user = snapshot.getValue(User.class);
                     mUsers.add(user);
                 }
-
                 userAdapter.notifyDataSetChanged();
             }
 

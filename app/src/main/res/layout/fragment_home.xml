@@ -13,8 +13,8 @@
         android:background="?android:attr/windowBackground">
 
         <android.support.v7.widget.Toolbar
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             android:background="?android:attr/windowBackground">
 
@@ -35,6 +35,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_message"
                     android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"/>
 
             </RelativeLayout>
@@ -42,11 +43,12 @@
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
-    
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/postRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bar"
-        android:id="@+id/recycler_view"/>
+        android:visibility="visible" />
 
 </RelativeLayout>
