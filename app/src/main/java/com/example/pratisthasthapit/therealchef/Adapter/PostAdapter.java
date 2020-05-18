@@ -44,7 +44,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostAdapter.ViewHolder viewHolder,final int i) {
+    public void onBindViewHolder(@NonNull final PostAdapter.ViewHolder viewHolder, final int i) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Post post = postList.get(i);
 
@@ -78,6 +78,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
         chefInfo(viewHolder.userImage, viewHolder.username, viewHolder.chef, post.getChef());
+        isLiked(post.getRecipeId(), viewHolder.likeImage);
+        numLikes(viewHolder.numLikes, post.getRecipeId());
+
+        viewHolder.likeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(viewHolder.likeImage.getTag().equals("like")){
+                    FirebaseDatabase.getInstance().getReference().child("Likes").child(post.getRecipeId())
+                            .child(firebaseUser.getUid()).setValue(true);
+                }
+                else {
+                    FirebaseDatabase.getInstance().getReference().child("Likes").child(post.getRecipeId())
+                            .child(firebaseUser.getUid()).removeValue();
+                }
+            }
+        });
     }
 
     @Override
@@ -107,6 +123,58 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             method = itemView.findViewById(R.id.method);
 
         }
+    }
+
+    private void isLiked(String recipeId, final ImageView likedImage){
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Likes").child(recipeId);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(firebaseUser.getUid()).exists()){
+                    likedImage.setImageResource(R.drawable.ic_like_color);
+                    likedImage.setTag("liked");
+                }
+                else {
+                    likedImage.setImageResource(R.drawable.ic_like);
+                    likedImage.setTag("like");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void numLikes(final TextView likeText, String recipeId){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes")
+                .child(recipeId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() == 0)
+                {
+                    likeText.setText("");
+                }
+                else if(dataSnapshot.getChildrenCount() == 1){
+                    likeText.setText(dataSnapshot.getChildrenCount()+ " like");
+                }
+                else{
+                    likeText.setText(dataSnapshot.getChildrenCount()+ " likes");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void chefInfo(final ImageView userImage, final TextView username, final TextView chef, String userId){

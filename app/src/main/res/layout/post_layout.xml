@@ -53,14 +53,26 @@
                 android:id="@+id/likeImage"
                 android:src="@drawable/ic_like"/>
 
+            <TextView
+                android:id="@+id/numLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/likeImage"
+                android:paddingEnd="25dp"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:text="x"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
             <ImageView
+                android:id="@+id/commentImage"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/commentImage"
-                android:src="@drawable/ic_comment"
                 android:layout_toEndOf="@+id/likeImage"
-                android:layout_marginStart="10dp"/>
-            
+                android:layout_toStartOf="@+id/saveImage"
+                android:src="@drawable/ic_comment" />
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -69,14 +81,6 @@
                 android:src="@drawable/ic_save"/>
 
         </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textStyle="bold"
-            android:id="@+id/numLikes"
-            android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_width="wrap_content"
