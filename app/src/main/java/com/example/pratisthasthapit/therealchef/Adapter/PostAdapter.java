@@ -1,6 +1,7 @@
 package com.example.pratisthasthapit.therealchef.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.pratisthasthapit.therealchef.CommentActivity;
 import com.example.pratisthasthapit.therealchef.Post;
 import com.example.pratisthasthapit.therealchef.R;
 import com.example.pratisthasthapit.therealchef.User;
@@ -80,6 +82,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         chefInfo(viewHolder.userImage, viewHolder.username, viewHolder.chef, post.getChef());
         isLiked(post.getRecipeId(), viewHolder.likeImage);
         numLikes(viewHolder.numLikes, post.getRecipeId());
+        getComments(post.getRecipeId(), viewHolder.comment);
 
         viewHolder.likeImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +95,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     FirebaseDatabase.getInstance().getReference().child("Likes").child(post.getRecipeId())
                             .child(firebaseUser.getUid()).removeValue();
                 }
+            }
+        });
+
+        viewHolder.commentImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("recipeId", post.getRecipeId());
+                intent.putExtra("chefId", post.getChef());
+                context.startActivity(intent);
+
+            }
+        });
+
+        viewHolder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("recipeId", post.getRecipeId());
+                intent.putExtra("chefId", post.getChef());
+                context.startActivity(intent);
+
             }
         });
     }
@@ -124,6 +149,36 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         }
     }
+
+    private void getComments(String recipeId, final TextView comment){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments")
+                .child(recipeId);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.getChildrenCount() == 0)
+                {
+                    comment.setText("");
+                }
+                else if (dataSnapshot.getChildrenCount() == 1)
+                {
+                    comment.setText("View " + dataSnapshot.getChildrenCount() + " Comment");
+                }
+                else
+                {
+                    comment.setText("View all " + dataSnapshot.getChildrenCount() + " Comments");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void isLiked(String recipeId, final ImageView likedImage){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
