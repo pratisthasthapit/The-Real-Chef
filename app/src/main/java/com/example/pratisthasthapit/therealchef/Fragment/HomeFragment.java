@@ -82,12 +82,11 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
 
                     Post post = snapshot.getValue(Post.class);
-//                    for (String id: listFollowing){
-//                        if (post.getChef().equals(id)){
-//                            postList.add(post);
-//                        }
-//                    }
-                    postList.add(0, post);
+                    for (String id: listFollowing){
+                        if (post.getChef().equals(id)){
+                            postList.add(post);
+                        }
+                    }
                 }
                 postAdapter.notifyDataSetChanged();
             }
