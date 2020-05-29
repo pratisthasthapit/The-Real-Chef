@@ -40,18 +40,17 @@ public class ProfileFragment extends Fragment {
     Button edit_profile_btn;
     ImageButton my_recipes, my_saved_recipe;
 
-    //private List<String> mySaves;
-
     FirebaseUser firebaseUser;
     String profileid;
 
     private RecyclerView myRecipe_recyclerView;
-    //private RecyclerView mySaved_recyclerView;
-
     private UserRecipeAdapter UserRecipeAdapter;
     private List<Post> postList;
-//    private MyFotosAdapter myFotosAdapter_saves;
-//    private List<Post> postList_saves;
+
+    private List<String> mySaved;
+    private RecyclerView mySaved_recyclerView;
+    private UserRecipeAdapter SavedRecipeAdapter;
+    private List<Post> saved_postList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,14 +83,22 @@ public class ProfileFragment extends Fragment {
         UserRecipeAdapter = new UserRecipeAdapter(getContext(), postList);
         myRecipe_recyclerView.setAdapter(UserRecipeAdapter);
 
-        myRecipe_recyclerView.setVisibility(View.VISIBLE);
+        mySaved_recyclerView = view.findViewById(R.id.mySaved_recyclerView);
+        mySaved_recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 2);
+        mySaved_recyclerView.setLayoutManager(linearLayoutManager1);
+        saved_postList = new ArrayList<>();
+        SavedRecipeAdapter = new UserRecipeAdapter(getContext(), saved_postList);
+        mySaved_recyclerView.setAdapter(SavedRecipeAdapter);
 
+        myRecipe_recyclerView.setVisibility(View.VISIBLE);
+        mySaved_recyclerView.setVisibility(View.GONE);
 
         userInfo();
         displayFollowers();
         getNumRecipe();
-        //myFotos();
         myRecipe();
+        mySavedRecipes();
 
         if(profileid.equals(firebaseUser.getUid())){
             edit_profile_btn.setText("Edit Profile");
@@ -123,6 +130,21 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        my_recipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRecipe_recyclerView.setVisibility(View.VISIBLE);
+                mySaved_recyclerView.setVisibility(View.GONE);
+            }
+        });
+
+        my_saved_recipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRecipe_recyclerView.setVisibility(View.GONE);
+                mySaved_recyclerView.setVisibility(View.VISIBLE);
+            }
+        });
         return view;
     }
 
@@ -246,27 +268,48 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-//    private void myFotos(){
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                postList.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    Post post = snapshot.getValue(Post.class);
-//                    if (post.getChef().equals(profileid)){
-//                        postList.add(post);
-//                    }
-//                }
-//                Collections.reverse(postList);
-//                UserRecipeAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    private void mySavedRecipes(){
+        mySaved = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Saves").child(firebaseUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    mySaved.add(snapshot.getKey());
+                }
+                getSavedRecipe();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getSavedRecipe() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                saved_postList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Post post = snapshot.getValue(Post.class);
+                    for (String id : mySaved){
+                        if (post.getRecipeId().equals(id)){
+                            saved_postList.add(post);
+                        }
+                    }
+                }
+                SavedRecipeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

@@ -81,8 +81,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         chefInfo(viewHolder.userImage, viewHolder.username, viewHolder.chef, post.getChef());
         isLiked(post.getRecipeId(), viewHolder.likeImage);
+        isSaved(post.getRecipeId(), viewHolder.saveImage);
         numLikes(viewHolder.numLikes, post.getRecipeId());
         getComments(post.getRecipeId(), viewHolder.comment);
+
+        viewHolder.saveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewHolder.saveImage.getTag().equals("save")){
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                            .child(post.getRecipeId()).setValue(true);
+                } else {
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                            .child(post.getRecipeId()).removeValue();
+                }
+            }
+        });
 
         viewHolder.likeImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +219,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         });
     }
 
+    private void isSaved(final String recipeId, final ImageView savedImage){
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Saves").child(firebaseUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(recipeId).exists()){
+                    savedImage.setImageResource(R.drawable.ic_saved);
+                    savedImage.setTag("saved");
+                }
+                else {
+                    savedImage.setImageResource(R.drawable.ic_save);
+                    savedImage.setTag("save");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     private void numLikes(final TextView likeText, String recipeId){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes")
                 .child(recipeId);
@@ -250,5 +288,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
     }
+
 
 }
