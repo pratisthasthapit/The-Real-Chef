@@ -53,13 +53,13 @@
         android:padding="10dp"/>
 
     <Button
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/register"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_red"
         android:text="Register"
-        android:textColor="@color/colorPrimary"
-        android:background="@drawable/button_background"
-        android:layout_marginTop="15dp"/>
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:layout_width="wrap_content"

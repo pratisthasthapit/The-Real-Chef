@@ -59,7 +59,7 @@
                 android:layout_gravity="center"
                 android:maxLines="1"
                 android:text="Username"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorRed"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/numRecipes"
-                                android:textColor="@color/colorPrimaryDark"
+                                android:textColor="@color/colorRed"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textStyle="bold"/>
@@ -115,7 +115,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/numFollowers"
-                                android:textColor="@color/colorPrimaryDark"
+                                android:textColor="@color/colorRed"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textStyle="bold"/>
@@ -137,7 +137,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/colorPrimaryDark"
+                                android:textColor="@color/colorRed"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:id="@+id/numFollowing"

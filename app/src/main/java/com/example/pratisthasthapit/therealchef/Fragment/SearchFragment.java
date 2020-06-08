@@ -49,6 +49,13 @@ public class SearchFragment extends Fragment {
 
         readUsers();
 
+        /**
+         * The code is taken from */
+
+        /*
+        * The functionality does...
+        * */
+
         searchBarText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

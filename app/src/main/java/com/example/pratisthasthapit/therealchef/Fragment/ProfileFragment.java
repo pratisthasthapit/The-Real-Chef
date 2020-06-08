@@ -1,6 +1,7 @@
 package com.example.pratisthasthapit.therealchef.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,8 +19,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.pratisthasthapit.therealchef.Adapter.UserRecipeAdapter;
+import com.example.pratisthasthapit.therealchef.MenuActivity;
 import com.example.pratisthasthapit.therealchef.Post;
 import com.example.pratisthasthapit.therealchef.R;
+import com.example.pratisthasthapit.therealchef.SettingsActivity;
 import com.example.pratisthasthapit.therealchef.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -101,7 +104,8 @@ public class ProfileFragment extends Fragment {
         mySavedRecipes();
 
         if(profileid.equals(firebaseUser.getUid())){
-            edit_profile_btn.setText("Edit Profile");
+            //edit_profile_btn.setText("Edit Profile");
+            edit_profile_btn.setBackgroundResource(0);
         } else {
             checkFollowing();
             my_saved_recipe.setVisibility(View.GONE);
@@ -112,10 +116,8 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 String btnText = edit_profile_btn.getText().toString();
 
-                if (btnText.equals("Edit Profile")){
 
-                }
-                else if (btnText.equals("follow")) {
+                if (btnText.equals("follow")) {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
@@ -126,6 +128,9 @@ public class ProfileFragment extends Fragment {
                             .child("following").child(profileid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
                             .child("followers").child(firebaseUser.getUid()).removeValue();
+                }
+                else if (btnText.equals("Edit Profile")){
+                    startActivity(new Intent(getContext(), SettingsActivity.class));
                 }
             }
         });
@@ -145,6 +150,15 @@ public class ProfileFragment extends Fragment {
                 mySaved_recyclerView.setVisibility(View.VISIBLE);
             }
         });
+
+        menuOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

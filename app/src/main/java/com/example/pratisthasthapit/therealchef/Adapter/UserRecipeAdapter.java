@@ -1,7 +1,9 @@
 package com.example.pratisthasthapit.therealchef.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.pratisthasthapit.therealchef.Fragment.RecipeDetailFragment;
 import com.example.pratisthasthapit.therealchef.Post;
 import com.example.pratisthasthapit.therealchef.R;
 
@@ -45,7 +48,19 @@ public class UserRecipeAdapter extends RecyclerView.Adapter<UserRecipeAdapter.Vi
             viewHolder.recipeName.setVisibility(View.VISIBLE);
             viewHolder.recipeName.setText(post.getRecipeName());
         }
+
+        viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("recipeid", post.getRecipeId());
+                editor.apply();
+
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipeDetailFragment()).commit();
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

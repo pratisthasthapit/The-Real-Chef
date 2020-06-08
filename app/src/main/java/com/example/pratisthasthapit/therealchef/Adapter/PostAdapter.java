@@ -2,7 +2,9 @@ package com.example.pratisthasthapit.therealchef.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.pratisthasthapit.therealchef.CommentActivity;
+import com.example.pratisthasthapit.therealchef.Fragment.ProfileFragment;
+import com.example.pratisthasthapit.therealchef.Fragment.RecipeDetailFragment;
 import com.example.pratisthasthapit.therealchef.Post;
 import com.example.pratisthasthapit.therealchef.R;
 import com.example.pratisthasthapit.therealchef.User;
@@ -84,6 +88,39 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         isSaved(post.getRecipeId(), viewHolder.saveImage);
         numLikes(viewHolder.numLikes, post.getRecipeId());
         getComments(post.getRecipeId(), viewHolder.comment);
+
+        viewHolder.userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", post.getChef());
+                editor.apply();
+
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+            }
+        });
+
+        viewHolder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", post.getChef());
+                editor.apply();
+
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+            }
+        });
+
+        viewHolder.chef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", post.getChef());
+                editor.apply();
+
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+            }
+        });
 
         viewHolder.saveImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,9 +233,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private void isLiked(String recipeId, final ImageView likedImage){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("Likes").child(recipeId);
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes").child(recipeId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -221,9 +256,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private void isSaved(final String recipeId, final ImageView savedImage){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("Saves").child(firebaseUser.getUid());
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -236,7 +269,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     savedImage.setTag("save");
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -244,8 +276,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         });
     }
     private void numLikes(final TextView likeText, String recipeId){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes")
-                .child(recipeId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes").child(recipeId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -272,7 +303,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private void chefInfo(final ImageView userImage, final TextView username, final TextView chef, String userId){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                             break;
                         }
-                        case R.id.nav_notification:{
-                            selectedFragment = new NotificationFragment();
-                            break;
-                        }
+//                        case R.id.nav_notification:{
+//                            selectedFragment = new NotificationFragment();
+//                            break;
+//                        }
                         case R.id.nav_profile:{
                             SharedPreferences.Editor editor = getSharedPreferences("PREF", MODE_PRIVATE).edit();
                             editor.putString("profileid", FirebaseAuth.getInstance().getInstance().getCurrentUser().getUid());
