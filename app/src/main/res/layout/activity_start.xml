@@ -15,21 +15,25 @@
         android:src="@drawable/logo"/>
 
     <Button
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log in"
-        android:id="@+id/login"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:textColor="@color/colorPrimary"
-        android:background="@drawable/button_background"/>
+        android:background="@drawable/button_red"
+        android:text="Log in"
+        android:textColor="@color/colorWhite" />
 
     <Button
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/register"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:textColor="@color/colorPrimary"
-        android:background="@drawable/button_background"/>
+        android:background="@drawable/button_red"
+        android:text="Register"
+        android:textColor="@color/colorWhite" />
 
 </LinearLayout>
