@@ -2,6 +2,17 @@
 
 > **The Chef App** is a social media application which is targeted for food enthusiasts. It is a platform where users can share their recipes and get influenced by each others.
 
+
+## Author
+
+•    Pratistha Sthapit
+
+
+## Contribution
+
+**Pratistha Sthapit (SID: 218101852)** – Student of **_SIT305- Android and iOS Mobile Programming_** ( _psthapit_ )
+
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -42,21 +53,14 @@ A video of the app demo presenting the interfaces and functionalities of the app
 •    Android Studio
 
 
-## Contribution
-
-**Pratistha Sthapit (SID: 218101852)** – Student of **_SIT305- Android and iOS Mobile Programming_** ( _psthapit_ )
-
-
 ## Versioning and History
 
 Please click the History button to see the history and the changes over each commit of the application
 
 
-## Author
-
-•    Pratistha Sthapit
-
-
 ## Licenses
 
 See the **Licenses.txt** for the detail of Licenses
+
+## Github link
+https://github.com/pratisthasthapit/The-Real-Chef.git
