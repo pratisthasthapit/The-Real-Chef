@@ -5,12 +5,8 @@
 
 ## Author
 
-•    Pratistha Sthapit
+**Pratistha Sthapit (SID: 218101852)** – Student of **_SIT305- Android and iOS Mobile Programming_** 
 
-
-## Contribution
-
-**Pratistha Sthapit (SID: 218101852)** – Student of **_SIT305- Android and iOS Mobile Programming_** ( _psthapit_ )
 
 
 ## Getting Started
