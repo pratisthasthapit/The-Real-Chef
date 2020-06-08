@@ -122,6 +122,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("recipeid", post.getRecipeId());
+                editor.apply();
+
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipeDetailFragment()).commit();
+            }
+        });
+
         viewHolder.saveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,7 +178,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 intent.putExtra("recipeId", post.getRecipeId());
                 intent.putExtra("chefId", post.getChef());
                 context.startActivity(intent);
-
             }
         });
     }
@@ -197,13 +207,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             comment = itemView.findViewById(R.id.comment);
             ingredient = itemView.findViewById(R.id.ingredient);
             method = itemView.findViewById(R.id.method);
-
         }
     }
 
     private void getComments(String recipeId, final TextView comment){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments")
-                .child(recipeId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments").child(recipeId);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -290,7 +298,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 else{
                     likeText.setText(dataSnapshot.getChildrenCount()+ " likes");
                 }
-
             }
 
             @Override

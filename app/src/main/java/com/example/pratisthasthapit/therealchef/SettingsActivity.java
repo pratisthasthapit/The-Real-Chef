@@ -47,7 +47,6 @@ public class SettingsActivity extends AppCompatActivity {
     private StorageTask uploadTask;
     StorageReference storageReference;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +83,6 @@ public class SettingsActivity extends AppCompatActivity {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 updateImage();
                 finish();
             }
@@ -134,21 +132,12 @@ public class SettingsActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-
     private void updateImage(){
 
         if (imageUri !=null){
             final StorageReference storageReference1 = storageReference.child(System.currentTimeMillis()+"."+ getMimeTypeExtension(imageUri));
 
             uploadTask = storageReference1.putFile(imageUri);
-//            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-//                @Override
-//                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-//                    if (!task.isSuccessful()){
-//                        throw task.getException();
-//                    }
-//                    return storageReference1.getDownloadUrl();
-//                }
             uploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {

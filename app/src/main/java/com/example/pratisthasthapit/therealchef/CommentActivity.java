@@ -76,7 +76,6 @@ public class CommentActivity extends AppCompatActivity {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-
         postComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +108,6 @@ public class CommentActivity extends AppCompatActivity {
 
     private  void getRecipeImage(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -144,5 +142,4 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
     }
-
 }

@@ -20,7 +20,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         edit_profile = findViewById(R.id.edit_profile);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Menu");
@@ -31,8 +30,6 @@ public class MenuActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
         logout = findViewById(R.id.logout);
 
         edit_profile.setOnClickListener(new View.OnClickListener() {
@@ -41,13 +38,10 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
             }
         });
-
     }
-
 
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MenuActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-
     }
 }

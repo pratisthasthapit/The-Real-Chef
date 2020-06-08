@@ -39,7 +39,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         this.recipeId = recipeId;
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -93,7 +92,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             username = itemView.findViewById(R.id.username);
             comment = itemView.findViewById(R.id.comment);
         }
-
     }
 
     private  void getChefInfo(final ImageView userImage, final TextView username, String chefId){
@@ -109,7 +107,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

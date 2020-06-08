@@ -31,8 +31,7 @@ public class RecipeDetailFragment extends Fragment {
     private List<Post> postList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
@@ -48,9 +47,7 @@ public class RecipeDetailFragment extends Fragment {
         recipeDetail_recyclerView.setAdapter(postAdapter);
 
         getPost();
-
         return view;
-
     }
 
     private void getPost(){

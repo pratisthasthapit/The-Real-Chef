@@ -73,8 +73,7 @@ public class PostActivity extends AppCompatActivity {
         pd.show();
 
         if (imageUri != null){
-            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()+
-                    "."+getFileExtension(imageUri));
+            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()+ "."+getFileExtension(imageUri));
 
             uploadTask = fileReference.putFile(imageUri);
             uploadTask.continueWithTask(new Continuation() {
@@ -123,7 +122,6 @@ public class PostActivity extends AppCompatActivity {
                     Toast.makeText(PostActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
         else {
             Toast.makeText(this, "Please select an image!", Toast.LENGTH_SHORT).show();
@@ -159,7 +157,6 @@ public class PostActivity extends AppCompatActivity {
                 uploadRecipe();
             }
         });
-
         CropImage.activity().setAspectRatio(1,1).start(PostActivity.this);
     }
 }

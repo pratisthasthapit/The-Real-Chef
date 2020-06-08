@@ -30,8 +30,7 @@ public class HomeFragment extends Fragment {
     private List<String> listFollowing;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         postRecyclerView = (RecyclerView)view.findViewById(R.id.postRecyclerView);
@@ -70,7 +69,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 
     private void parseData(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.pratisthasthapit.therealchef.Fragment.HomeFragment;
-import com.example.pratisthasthapit.therealchef.Fragment.NotificationFragment;
 import com.example.pratisthasthapit.therealchef.Fragment.ProfileFragment;
 import com.example.pratisthasthapit.therealchef.Fragment.SearchFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                             break;
                         }
-//                        case R.id.nav_notification:{
-//                            selectedFragment = new NotificationFragment();
-//                            break;
-//                        }
                         case R.id.nav_profile:{
                             SharedPreferences.Editor editor = getSharedPreferences("PREF", MODE_PRIVATE).edit();
                             editor.putString("profileid", FirebaseAuth.getInstance().getInstance().getCurrentUser().getUid());

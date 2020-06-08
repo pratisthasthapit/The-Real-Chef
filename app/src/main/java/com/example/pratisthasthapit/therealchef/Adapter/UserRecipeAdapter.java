@@ -61,7 +61,6 @@ public class UserRecipeAdapter extends RecyclerView.Adapter<UserRecipeAdapter.Vi
         });
     }
 
-
     @Override
     public int getItemCount() {
         return postList.size();

@@ -3,7 +3,6 @@ package com.example.pratisthasthapit.therealchef.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -40,7 +39,7 @@ public class ProfileFragment extends Fragment {
 
     ImageView userImage, menuOption;
     TextView numRecipes, numFollowers, numFollowing, fullname, userBio, username;
-    Button edit_profile_btn;
+    Button followBtn;
     ImageButton my_recipes, my_saved_recipe;
 
     FirebaseUser firebaseUser;
@@ -56,8 +55,7 @@ public class ProfileFragment extends Fragment {
     private List<Post> saved_postList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
@@ -74,7 +72,7 @@ public class ProfileFragment extends Fragment {
         fullname = view.findViewById(R.id.fullname);
         userBio = view.findViewById(R.id.userBio);
         username = view.findViewById(R.id.username);
-        edit_profile_btn = view.findViewById(R.id.edit_profile_btn);
+        followBtn = view.findViewById(R.id.followBtn);
         my_recipes = view.findViewById(R.id.my_recipes);
         my_saved_recipe = view.findViewById(R.id.my_saved_recipe);
 
@@ -104,18 +102,16 @@ public class ProfileFragment extends Fragment {
         mySavedRecipes();
 
         if(profileid.equals(firebaseUser.getUid())){
-            //edit_profile_btn.setText("Edit Profile");
-            edit_profile_btn.setBackgroundResource(0);
+            followBtn.setBackgroundResource(0);
         } else {
             checkFollowing();
             my_saved_recipe.setVisibility(View.GONE);
         }
 
-        edit_profile_btn.setOnClickListener(new View.OnClickListener() {
+        followBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String btnText = edit_profile_btn.getText().toString();
-
+                String btnText = followBtn.getText().toString();
 
                 if (btnText.equals("follow")) {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
@@ -191,10 +187,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(profileid).exists()){
-                    edit_profile_btn.setText("following");
+                    followBtn.setText("following");
                 }
                 else {
-                    edit_profile_btn.setText("follow");
+                    followBtn.setText("follow");
                 }
             }
 
@@ -325,5 +321,4 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
 }
