@@ -1,6 +1,6 @@
 # The-Real-Chef
 
-> **The Chef App** is a social media app which is targeted for food enthusiasts. It is a platform where users can share their recipes and get influenced by each others.
+> **The Chef App** is a social media application which is targeted for food enthusiasts. It is a platform where users can share their recipes and get influenced by each others.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
