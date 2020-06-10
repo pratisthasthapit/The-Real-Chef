@@ -78,7 +78,6 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postList.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-
                     Post post = snapshot.getValue(Post.class);
                     for (String id: listFollowing){
                         if (post.getChef().equals(id)){

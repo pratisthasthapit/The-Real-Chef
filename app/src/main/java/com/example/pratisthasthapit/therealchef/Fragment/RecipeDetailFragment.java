@@ -68,5 +68,4 @@ public class RecipeDetailFragment extends Fragment {
             }
         });
     }
-
 }

@@ -92,7 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
                 editor.putString("profileid", post.getChef());
                 editor.apply();
 
@@ -103,7 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
                 editor.putString("profileid", post.getChef());
                 editor.apply();
 
@@ -114,7 +114,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.chef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
                 editor.putString("profileid", post.getChef());
                 editor.apply();
 
@@ -125,7 +125,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
                 editor.putString("recipeid", post.getRecipeId());
                 editor.apply();
 
