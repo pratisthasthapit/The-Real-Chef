@@ -32,6 +32,9 @@ public class MenuActivity extends AppCompatActivity {
         });
         logout = findViewById(R.id.logout);
 
+        /**
+         * Opens settings activity
+         */
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +43,10 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Logs out user from the app
+     * @param view: Current view
+     */
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MenuActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

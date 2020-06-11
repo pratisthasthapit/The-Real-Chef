@@ -34,7 +34,7 @@ public class RecipeDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
-        SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences("PREF", Context.MODE_PRIVATE);
         recipeId = prefs.getString("recipeid", "none");
 
         recipeDetail_recyclerView = view.findViewById(R.id.recipeDetail_recyclerView);
@@ -50,6 +50,9 @@ public class RecipeDetailFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Get the details of post from the database whose details are to be displayed.
+     */
     private void getPost(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId);
 

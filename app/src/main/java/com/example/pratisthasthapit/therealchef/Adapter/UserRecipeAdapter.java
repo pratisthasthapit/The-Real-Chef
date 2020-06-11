@@ -49,10 +49,13 @@ public class UserRecipeAdapter extends RecyclerView.Adapter<UserRecipeAdapter.Vi
             viewHolder.recipeName.setText(post.getRecipeName());
         }
 
+        /**
+         * On clicking the recipe image in the user profile page, recipe detail page is displayed.
+         */
         viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
                 editor.putString("recipeid", post.getRecipeId());
                 editor.apply();
 

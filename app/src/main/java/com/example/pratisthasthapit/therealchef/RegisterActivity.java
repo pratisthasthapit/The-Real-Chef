@@ -45,12 +45,20 @@ public class RegisterActivity extends AppCompatActivity {
         txt_login = findViewById(R.id.txt_login);
 
         auth = FirebaseAuth.getInstance();
+
+        /**
+         * Opens login activity.
+         */
         txt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
+
+        /**
+         * Allows user to register for the app.
+         */
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String str_email = email.getText().toString();
                 String str_password = password.getText().toString();
 
+                /**
+                 * Checks if all text fields are entered.
+                 */
                 if (TextUtils.isEmpty(str_username)||TextUtils.isEmpty(str_fullname)||TextUtils.isEmpty(str_email)||TextUtils.isEmpty(str_password))
                 {
                     Toast.makeText(RegisterActivity.this, "Please fill in the empty fields!", Toast.LENGTH_SHORT).show();
@@ -79,12 +90,23 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Add user details in the database
+     * @param username: username of user
+     * @param fullname: fullname of user
+     * @param email: email of user
+     * @param password: password of user
+     */
     private  void register(final String username, final String fullname, String email, String password){
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>()
         {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                /**
+                 * Checks if the email has been previously used for another account
+                 * Add the user detail in the database using HashMap
+                 */
                 if (task.isSuccessful()){
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     String userid = firebaseUser.getUid();
@@ -102,6 +124,9 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 pd.dismiss();
 
+                                /**
+                                 * Send verification email to the user's entered email address
+                                 */
                                 auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {

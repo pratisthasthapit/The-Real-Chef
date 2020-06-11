@@ -76,6 +76,9 @@ public class ProfileFragment extends Fragment {
         my_recipes = view.findViewById(R.id.my_recipes);
         my_saved_recipe = view.findViewById(R.id.my_saved_recipe);
 
+        /**
+         * Recycler view containing the user's posts
+         */
         myRecipe_recyclerView = view.findViewById(R.id.myRecipe_recyclerView);
         myRecipe_recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -84,6 +87,9 @@ public class ProfileFragment extends Fragment {
         UserRecipeAdapter = new UserRecipeAdapter(getContext(), postList);
         myRecipe_recyclerView.setAdapter(UserRecipeAdapter);
 
+        /**
+         * Recycler view containing saved recipes
+         */
         mySaved_recyclerView = view.findViewById(R.id.mySaved_recyclerView);
         mySaved_recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 2);
@@ -92,6 +98,9 @@ public class ProfileFragment extends Fragment {
         SavedRecipeAdapter = new UserRecipeAdapter(getContext(), saved_postList);
         mySaved_recyclerView.setAdapter(SavedRecipeAdapter);
 
+        /**
+         * Setting the recycler view with the user's posts to display initially.
+         */
         myRecipe_recyclerView.setVisibility(View.VISIBLE);
         mySaved_recyclerView.setVisibility(View.GONE);
 
@@ -101,13 +110,27 @@ public class ProfileFragment extends Fragment {
         myRecipe();
         mySavedRecipes();
 
+        /**
+         * If the profile fragment displays the user's own profile, the follow/following button is disabled.
+         * Else the option to display saved list of recipes is disabled.
+         */
         if(profileid.equals(firebaseUser.getUid())){
-            followBtn.setBackgroundResource(0);
-        } else {
+            //followBtn.setBackgroundResource(0);
+            followBtn.setVisibility(View.GONE);
+        }
+        else
+        {
+            /**
+             * Check if the user is followed or not by the current user
+             */
             checkFollowing();
             my_saved_recipe.setVisibility(View.GONE);
         }
 
+        /**
+         * On clicking the followBtn, the database is updated such that
+         * the user is added to/removed from followers/following list.
+         */
         followBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,12 +148,15 @@ public class ProfileFragment extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
                             .child("followers").child(firebaseUser.getUid()).removeValue();
                 }
-                else if (btnText.equals("Edit Profile")){
-                    startActivity(new Intent(getContext(), SettingsActivity.class));
-                }
             }
         });
 
+
+
+        /**
+         * On clicking my_recipes, the recycler view containing
+         * list of the user's recipes are displayed
+         */
         my_recipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +165,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /**
+         * On clicking my_saved_recipe, the recycler view containing
+         * list of saved recipes are displayed
+         */
         my_saved_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +177,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /**
+         * Opens menu activity
+         */
         menuOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +191,9 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Displays user's information in profile fragment.
+     */
     private void userInfo(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileid);
         reference.addValueEventListener(new ValueEventListener() {
@@ -181,6 +217,11 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+    /**
+     * Checks the status of the user and changes the
+     * followBtn text from following to follow button or vice versa.
+     */
     private void checkFollowing(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid()).child("following");
         reference.addValueEventListener(new ValueEventListener() {
@@ -201,7 +242,15 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Gets the total number of followers and following from the database
+     * and displays it in the profile fragment.
+     */
     private void displayFollowers(){
+
+        /**
+         * Getting number of followers
+         */
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(profileid).child("followers");
 
@@ -217,6 +266,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /**
+         * Getting number of following
+         */
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(profileid).child("following");
 
@@ -233,6 +285,10 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Gets the total number of recipes posted by the user from the database
+     * and displays it in the profile fragment.
+     */
     private void getNumRecipe(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
         reference.addValueEventListener(new ValueEventListener() {
@@ -255,6 +311,10 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Gets the list of recipes posted by the user and adds it to postList in reverse order
+     * Notifies the UserRecipeAdapter of any changes and updates the list
+     */
     private void myRecipe(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
         reference.addValueEventListener(new ValueEventListener() {
@@ -278,6 +338,9 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Gets the list of recipes saved and adds to mySaved list
+     */
     private void mySavedRecipes(){
         mySaved = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Saves").child(firebaseUser.getUid());
@@ -298,6 +361,10 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Gets the list of recipes saved by the user and adds it to saved_postList
+     * Notifies the SavedRecipeAdapter of any changes and updates the list
+     */
     private void getSavedRecipe() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
         reference.addValueEventListener(new ValueEventListener() {

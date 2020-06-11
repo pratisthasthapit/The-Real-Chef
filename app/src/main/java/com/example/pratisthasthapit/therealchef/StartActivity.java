@@ -17,8 +17,15 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        /**
+         * Get current user.
+         */
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        /**
+         * Open MainActivity.
+         */
         if (firebaseUser != null){
             startActivity(new Intent(StartActivity.this, MainActivity.class));
             finish();
@@ -33,6 +40,9 @@ public class StartActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
 
+        /**
+         * Open loginActivity.
+         */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +50,9 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Open registerActivity.
+         */
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

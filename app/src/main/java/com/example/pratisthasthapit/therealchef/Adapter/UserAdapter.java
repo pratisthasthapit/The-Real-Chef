@@ -22,9 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
@@ -59,10 +57,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
         isFollowing(user.getId(), viewHolder.followBtn);
 
+        /**
+         * If the user is displaying its own profile, the follow/following button is set invisible.
+         */
         if (user.getId().equals(firebaseUser.getUid())){
             viewHolder.followBtn.setVisibility(View.GONE);
         }
 
+        /**
+         * On clicking the item(user) on the list, the selected user's profile is displayed.
+         */
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +78,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             }
         });
 
+        /**
+         * On clicking the followBtn, user is added to/removed from the follower and following list.
+         */
         viewHolder.followBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +123,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         }
     }
 
+    /**
+     * Checks if the user is following the other user and updates the follow/following button text.
+     * @param userid: userid of the user to follow/following
+     * @param button: button which allows user to follow or unfollow other users.
+     */
     private void isFollowing(final String userid, final Button button){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid()).child("following");
         reference.addValueEventListener(new ValueEventListener() {

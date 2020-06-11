@@ -89,6 +89,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         numLikes(viewHolder.numLikes, post.getRecipeId());
         getComments(post.getRecipeId(), viewHolder.comment);
 
+        /**
+         * Opens the profile id of the chef of the post
+         */
         viewHolder.userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +103,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Opens the profile id of the chef of the post
+         */
         viewHolder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +117,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Opens the profile id of the chef of the post
+         */
         viewHolder.chef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +131,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Opens the detailed information of the recipe
+         */
         viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +145,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Saves the post in the user's saved list of posts
+         */
         viewHolder.saveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +161,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Sets likes tag on a post when a user likes a post.
+         */
         viewHolder.likeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,6 +178,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Opens comments fragment where user can post comments.
+         */
         viewHolder.commentImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +192,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
+        /**
+         * Opens comments fragment where user can post comments.
+         */
         viewHolder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,6 +234,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
+    /**
+     * Displays total number of comments in the post and allows the user to view comments.
+     * If there are no comments, the text view is left empty.
+     * @param recipeId: recipe id of the post
+     * @param comment: number of comments displayed at the bottom of the post
+     */
     private void getComments(String recipeId, final TextView comment){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments").child(recipeId);
 
@@ -238,7 +268,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         });
     }
 
-
+    /**
+     * Displays whether the post has been liked or not by the user using colored and bordered like icons.
+     * @param recipeId: recipe id of the recipe
+     * @param likedImage: the like icon
+     */
     private void isLiked(String recipeId, final ImageView likedImage){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes").child(recipeId);
@@ -262,6 +296,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         });
     }
 
+    /**
+     * Displays whether the post has been saved or not by the user using colored and bordered save icons.
+     * @param recipeId: recipe id of the recipe
+     * @param savedImage: the save icon
+     */
     private void isSaved(final String recipeId, final ImageView savedImage){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid());
@@ -283,6 +322,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
     }
+
+    /**
+     * Displays the number of likes
+     * @param likeText: The text view which displays the number of likes
+     * @param recipeId: recipe id of the post
+     */
     private void numLikes(final TextView likeText, String recipeId){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes").child(recipeId);
         reference.addValueEventListener(new ValueEventListener() {
@@ -305,9 +350,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             }
         });
-
     }
 
+    /**
+     * Updates the user information
+     * @param userImage: user image of the user who posted the recipe
+     * @param username: username of the user who posted the recipe
+     * @param chef: username of the user who posted the recipe
+     * @param userId: user id of the user who posted the recipe
+     */
     private void chefInfo(final ImageView userImage, final TextView username, final TextView chef, String userId){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
@@ -325,6 +376,4 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
     }
-
-
 }

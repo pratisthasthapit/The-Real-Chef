@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Bundle intent = getIntent().getExtras();
         if (intent !=null){
             String chef = intent.getString("chefId");
-            SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-            editor.putString("id", chef);
+            SharedPreferences.Editor editor = getSharedPreferences("PREF", MODE_PRIVATE).edit();
+            editor.putString("profileid", chef);
             editor.apply();
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set bottom navigation menu
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override

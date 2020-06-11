@@ -47,6 +47,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
+    /**
+     * Gets a list of "following" users and reads their posts
+     */
     private void checkFollowing(){
         listFollowing = new ArrayList<>();
 
@@ -61,6 +65,10 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     listFollowing.add(snapshot.getKey());
                 }
+
+                /**
+                 * Reads posts of "following" user
+                 */
                 parseData();
             }
 
@@ -70,6 +78,9 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    /**
+     * Reads all the recipes posted by the user from the listFollowing.
+     */
     private void parseData(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
 

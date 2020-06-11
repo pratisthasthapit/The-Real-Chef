@@ -41,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        /**
+         * Opens register activity.
+         */
         signupTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +51,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Allows user to login.
+         */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                 String str_email = email.getText().toString();
                 String str_password = password.getText().toString();
 
+                /**
+                 * Checks if all text fields are entered.
+                 */
                 if (TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)){
                     Toast.makeText(LoginActivity.this, "Please enter the empty fields!", Toast.LENGTH_SHORT).show();
                 }
@@ -66,7 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            /**
+                             * Authenticates the email and password
+                             */
                             if (task.isSuccessful()) {
+                                /**
+                                 * Checks if the user has verified the email
+                                 */
                                 if (auth.getCurrentUser().isEmailVerified()) {
                                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
                                     reference.addValueEventListener(new ValueEventListener() {

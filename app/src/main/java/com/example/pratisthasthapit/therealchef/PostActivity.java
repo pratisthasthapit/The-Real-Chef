@@ -47,6 +47,10 @@ public class PostActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        /**
+         * Checks if an image has been selected,
+         * If image is selected, the image is cropped to an 1:1 ratio.
+         */
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
@@ -61,17 +65,28 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Get the extension of the image file
+     * @param uri: Image uri
+     * @return: return mime type extension
+     */
     private String getFileExtension(Uri uri){
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    /**
+     * Upload recipe to the database
+     */
     private void uploadRecipe(){
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Posting recipe...");
         pd.show();
 
+        /**
+         * Check if an image has been selected
+         */
         if (imageUri != null){
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis()+ "."+getFileExtension(imageUri));
 
@@ -88,6 +103,9 @@ public class PostActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()){
+                        /**
+                         * Save recipe in database and open mainActivity
+                         */
                         Uri downloadUri = task.getResult();
                         imageUrl = downloadUri.toString();
 
@@ -117,6 +135,10 @@ public class PostActivity extends AppCompatActivity {
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
+                /**
+                 * Send error message
+                 * @param e: exception
+                 */
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(PostActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -142,6 +164,9 @@ public class PostActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference("recipes");
 
+        /**
+         * Closes the PostActivity and opens MainActivity
+         */
         closeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,12 +176,19 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Uploads the recipe
+         */
         postTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadRecipe();
             }
         });
+
+        /**
+         * Set aspect ratio to 1:1
+         */
         CropImage.activity().setAspectRatio(1,1).start(PostActivity.this);
     }
 }

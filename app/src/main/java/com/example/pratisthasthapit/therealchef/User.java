@@ -19,6 +19,10 @@ public class User {
     public User() {
     }
 
+    /**
+     * Getters and setters
+     * @return: returns the corresponding values.
+     */
     public String getId() {
         return id;
     }

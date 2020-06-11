@@ -47,15 +47,14 @@ public class SearchFragment extends Fragment {
         userAdapter = new UserAdapter(getContext(), mUsers);
         recyclerView.setAdapter(userAdapter);
 
+        /**
+         * Gets a list of all the users.
+         */
         readUsers();
 
         /**
-         * The code is taken from */
-
-        /*
-        * The functionality does...
-        * */
-
+         * Displays the users in the recycler view as per the text in the searchbar text
+         */
         searchBarText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -75,9 +74,13 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void searchUsers(String s){
+    /**
+     * Searches for a list of users from the database
+     * @param key: keyword to search the user.
+     */
+    private void searchUsers(String key){
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username")
-                .startAt(s).endAt(s+"\uf8ff");
+                .startAt(key).endAt(key+"\uf8ff");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -97,6 +100,9 @@ public class SearchFragment extends Fragment {
         });
     }
 
+    /**
+     * Reads the user from the database and notifies the userAdapter of any changes occured.
+     */
     private void readUsers(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {

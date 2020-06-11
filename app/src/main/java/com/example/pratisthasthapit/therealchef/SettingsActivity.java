@@ -63,6 +63,9 @@ public class SettingsActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference("store");
 
+        /**
+         * Get current user's data from database
+         */
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,6 +83,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Update image and return back to menu.
+         */
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +94,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Allows user to select and crop the new user image.
+         */
         change_userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +104,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Display user's current user image.
+         */
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +114,10 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Save updated fullname, username and bio.
+         * Close current activity
+         */
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +127,12 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Save the updated fullname, username and bio in the database.
+     * @param fullname: fullname of user
+     * @param username: username of user
+     * @param bio: bio of user
+     */
     private void saveProfile(String fullname, String username, String bio) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -132,8 +154,14 @@ public class SettingsActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    /**
+     * Update the user image
+     */
     private void updateImage(){
 
+        /**
+         * Checks if an image has been selected
+         */
         if (imageUri !=null){
             final StorageReference storageReference1 = storageReference.child(System.currentTimeMillis()+"."+ getMimeTypeExtension(imageUri));
 
@@ -153,6 +181,9 @@ public class SettingsActivity extends AppCompatActivity {
                         Uri savedUri = task.getResult();
                         String userUri = savedUri.toString();
 
+                        /**
+                         * Update database using HashMap
+                         */
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("imageurl", ""+userUri);
@@ -175,6 +206,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Crops and updates the image
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

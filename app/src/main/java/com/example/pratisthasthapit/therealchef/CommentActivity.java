@@ -76,6 +76,10 @@ public class CommentActivity extends AppCompatActivity {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        /**
+         * If the commentText is empty, a Toast is displayed.
+         * If commentText is not empty, addComment() is called.
+         */
         postComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,10 +92,13 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
 
-        getRecipeImage();
+        getUserImage();
         readComments();
     }
 
+    /**
+     * Adds the comment to the database using HashMap
+     */
     private void addComment() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(recipeId);
 
@@ -106,7 +113,10 @@ public class CommentActivity extends AppCompatActivity {
         commentText.setText("");
     }
 
-    private  void getRecipeImage(){
+    /**
+     * Set the user image of the comment poster in the comments
+     */
+    private  void getUserImage(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -122,6 +132,11 @@ public class CommentActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get a list comments for the post and add it to commentList.
+     * Notifies commentAdapter of any new added comments and displays
+     * it in the recyclerview
+     */
     private void readComments(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(recipeId);
 

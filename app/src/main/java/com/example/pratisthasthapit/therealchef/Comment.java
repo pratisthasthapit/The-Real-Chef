@@ -16,6 +16,10 @@ public class Comment {
     public Comment() {
     }
 
+    /**
+     * Getters and setters
+     * @return: returns the corresponding values.
+     */
     public String getComment() {
         return comment;
     }

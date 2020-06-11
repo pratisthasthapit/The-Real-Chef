@@ -21,6 +21,10 @@ public class Post {
     public Post() {
     }
 
+    /**
+     * Getters and setters
+     * @return: returns the corresponding values.
+     */
     public String getRecipeId() {
         return recipeId;
     }
