@@ -32,7 +32,7 @@ After you have all the files and the software downloaded and installed.
 
 ## Presentation and Demo
 
-A video of the app demo presenting the interfaces and functionalities of the application can be viewed through this link:
+A video of the app demo presenting the interfaces and functionalities of the application can be viewed through this link: https://youtu.be/V2YTvZ_GzCM
 
 
 ## Built With
