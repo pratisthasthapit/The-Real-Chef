@@ -187,6 +187,10 @@ public class PostActivity extends AppCompatActivity {
         });
 
         /**
+         * The line 196 was inspired by
+         * https://www.codota.com/code/java/methods/com.theartofdev.edmodo.cropper.CropImage$ActivityBuilder/setAspectRatio
+         */
+        /**
          * Set aspect ratio to 1:1
          */
         CropImage.activity().setAspectRatio(1,1).start(PostActivity.this);

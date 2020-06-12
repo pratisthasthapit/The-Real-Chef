@@ -1,4 +1,4 @@
-package com.example.pratisthasthapit.therealchef.Fragment;
+package com.example.pratisthasthapit.therealchef;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.pratisthasthapit.therealchef.Adapter.PostAdapter;
+import com.example.pratisthasthapit.therealchef.PostAdapter;
 import com.example.pratisthasthapit.therealchef.Post;
 import com.example.pratisthasthapit.therealchef.R;
 import com.google.firebase.database.DataSnapshot;

@@ -91,6 +91,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
+     * The email verification function was inspired by
+     * https://www.youtube.com/watch?v=06YKlMdWyMM
+     */
+    /**
      * Add user details in the database
      * @param username: username of user
      * @param fullname: fullname of user

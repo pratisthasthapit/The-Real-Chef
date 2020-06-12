@@ -1,4 +1,4 @@
-package com.example.pratisthasthapit.therealchef.Adapter;
+package com.example.pratisthasthapit.therealchef;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,9 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.pratisthasthapit.therealchef.Fragment.RecipeDetailFragment;
-import com.example.pratisthasthapit.therealchef.Post;
-import com.example.pratisthasthapit.therealchef.R;
 
 import java.util.List;
 

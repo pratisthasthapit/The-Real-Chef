@@ -1,4 +1,4 @@
-package com.example.pratisthasthapit.therealchef.Adapter;
+package com.example.pratisthasthapit.therealchef;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.pratisthasthapit.therealchef.CommentActivity;
-import com.example.pratisthasthapit.therealchef.Fragment.ProfileFragment;
-import com.example.pratisthasthapit.therealchef.Fragment.RecipeDetailFragment;
-import com.example.pratisthasthapit.therealchef.Post;
-import com.example.pratisthasthapit.therealchef.R;
-import com.example.pratisthasthapit.therealchef.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

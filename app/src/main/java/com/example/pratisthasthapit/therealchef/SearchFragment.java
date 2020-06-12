@@ -1,4 +1,4 @@
-package com.example.pratisthasthapit.therealchef.Fragment;
+package com.example.pratisthasthapit.therealchef;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.pratisthasthapit.therealchef.Adapter.UserAdapter;
+import com.example.pratisthasthapit.therealchef.UserAdapter;
 import com.example.pratisthasthapit.therealchef.User;
 import com.example.pratisthasthapit.therealchef.R;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +52,10 @@ public class SearchFragment extends Fragment {
          */
         readUsers();
 
+        /**
+         * The following function was inspired by
+         * https://www.codota.com/code/java/methods/android.widget.TextView/addTextChangedListener
+         */
         /**
          * Displays the users in the recycler view as per the text in the searchbar text
          */

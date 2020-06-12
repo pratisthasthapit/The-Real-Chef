@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.pratisthasthapit.therealchef.Adapter.CommentAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -97,6 +96,10 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     /**
+     * The following function was inspired from
+     * https://www.youtube.com/watch?v=HEJg-hvj0nE
+     */
+    /**
      * Adds the comment to the database using HashMap
      */
     private void addComment() {
@@ -114,9 +117,14 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     /**
+     * The following function is inspired by
+     * https://www.youtube.com/watch?v=OH3PgaUv-nA and
+     * https://www.youtube.com/watch?v=GV1qbi59rgc&t=257s
+     */
+    /**
      * Set the user image of the comment poster in the comments
      */
-    private  void getUserImage(){
+    private void getUserImage(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -132,6 +140,10 @@ public class CommentActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * The following function was inspired from
+     * https://www.youtube.com/watch?v=HEJg-hvj0nE
+     */
     /**
      * Get a list comments for the post and add it to commentList.
      * Notifies commentAdapter of any new added comments and displays

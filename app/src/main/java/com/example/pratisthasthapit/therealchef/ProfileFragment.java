@@ -1,4 +1,4 @@
-package com.example.pratisthasthapit.therealchef.Fragment;
+package com.example.pratisthasthapit.therealchef;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.pratisthasthapit.therealchef.Adapter.UserRecipeAdapter;
+import com.example.pratisthasthapit.therealchef.UserRecipeAdapter;
 import com.example.pratisthasthapit.therealchef.MenuActivity;
 import com.example.pratisthasthapit.therealchef.Post;
 import com.example.pratisthasthapit.therealchef.R;
-import com.example.pratisthasthapit.therealchef.SettingsActivity;
 import com.example.pratisthasthapit.therealchef.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,7 +114,6 @@ public class ProfileFragment extends Fragment {
          * Else the option to display saved list of recipes is disabled.
          */
         if(profileid.equals(firebaseUser.getUid())){
-            //followBtn.setBackgroundResource(0);
             followBtn.setVisibility(View.GONE);
         }
         else
@@ -127,6 +125,11 @@ public class ProfileFragment extends Fragment {
             my_saved_recipe.setVisibility(View.GONE);
         }
 
+        /**
+         * The following code was inspired by
+         * https://www.youtube.com/watch?v=59ibixMg4ck
+         * and has been applied else where in app.
+         */
         /**
          * On clicking the followBtn, the database is updated such that
          * the user is added to/removed from followers/following list.
@@ -339,6 +342,11 @@ public class ProfileFragment extends Fragment {
     }
 
     /**
+     * The following function was inspired by
+     * https://www.youtube.com/watch?v=OH3PgaUv-nA
+     * and has been applied else where in app.
+     */
+    /**
      * Gets the list of recipes saved and adds to mySaved list
      */
     private void mySavedRecipes(){
@@ -361,6 +369,11 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * The following function was inspired by
+     * https://www.youtube.com/watch?v=OH3PgaUv-nA
+     * and has been applied else where in app.
+     */
     /**
      * Gets the list of recipes saved by the user and adds it to saved_postList
      * Notifies the SavedRecipeAdapter of any changes and updates the list

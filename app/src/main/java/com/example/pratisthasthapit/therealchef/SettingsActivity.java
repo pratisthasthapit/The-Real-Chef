@@ -155,6 +155,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
+     * The following code was inspired by
+     * https://www.youtube.com/watch?v=3NYIwEpYbOA&list=PLzLFqCABnRQduspfbu2empaaY9BoIGLDM&index=16
+     */
+    /**
      * Update the user image
      */
     private void updateImage(){

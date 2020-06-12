@@ -52,6 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         /**
+         * The email verification function was inspired by
+         * https://www.youtube.com/watch?v=06YKlMdWyMM
+         */
+        /**
          * Allows user to login.
          */
         login.setOnClickListener(new View.OnClickListener() {

@@ -1,10 +1,8 @@
-package com.example.pratisthasthapit.therealchef.Adapter;
+package com.example.pratisthasthapit.therealchef;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.pratisthasthapit.therealchef.Comment;
-import com.example.pratisthasthapit.therealchef.Fragment.ProfileFragment;
-import com.example.pratisthasthapit.therealchef.MainActivity;
-import com.example.pratisthasthapit.therealchef.R;
-import com.example.pratisthasthapit.therealchef.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -59,7 +52,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         getChefInfo(viewHolder.userImage, viewHolder.username, comment.getChef());
 
         /**
-         * Opens
+         * Opens user profile
          */
         viewHolder.username.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,26 +61,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("chefId", comment.getChef());
                 context.startActivity(intent);
-
-//                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
-//                editor.putString("profileid", comment.getChef());
-//                editor.apply();
-//
-//                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-            }
+           }
         });
 
+        /**
+         * Opens user profile
+         */
         viewHolder.userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("chefId", comment.getChef());
                 context.startActivity(intent);
-
-//                SharedPreferences.Editor editor = context.getSharedPreferences("PREF", Context.MODE_PRIVATE).edit();
-//                editor.putString("profileid", comment.getChef());
-//                editor.apply();
-//                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
             }
         });
     }
